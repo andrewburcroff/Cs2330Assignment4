@@ -2,7 +2,9 @@
 	.text
 .global	MyMult
 MyMult:
-ret:
-	add.w	r14, r15
+	mov 	r15, pc
+	.L1:
+	add.w	pc, r15
 	dec.w r14
-	jnz .ret
+	jnz 	.L1
+	ret
