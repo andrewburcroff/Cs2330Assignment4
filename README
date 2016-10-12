@@ -1,15 +1,21 @@
 Assignment 5, CS223, Fall 2016
 Push by Tuesday , 10/11/2016
 
-You are to write a simple assembly language program for the msp430. It will be called as 
+You are to write a simple assembly language program for the msp430. It will be called as
 	int MyMult(int, int);
-and perform a multiplication by repeated addition (suppose your processor had no multiply circuit !?). 
+and perform a multiplication by repeated addition (suppose your processor had no multiply circuit !?).
 
-As we have seen the parameters sent to the function from a C main will arrive in registers R15, R14 and the return value will be put in R15. An example of such a scheme is included in this repo where a C main calls an assembly function that returns the min of two values. 
+As we have seen the parameters sent to the function from a C main will arrive in registers R15, R14 and the return value
+will be put in R15. An example of such a scheme is included in this repo where a C main calls an assembly function that returns
+the min of two values.
 
-We are straightaway using the fact that processor flags (N,Z,V,C) can be tested to modify control flow. Fortunately, for numeric interpretation our assembler has supplied some helpful mnemonics so we can still think algorithmically without looking as specific flags. 
+We are straightaway using the fact that processor flags (N,Z,V,C) can be tested to modify control flow. Fortunately, for
+numeric interpretation our assembler has supplied some helpful mnemonics so we can still think algorithmically without
+looking as specific flags.
 
-Let's look at min.S , and note that we have overtly made the file have a name with ".S" as the final two characters in the file name. This allows our gcc toolchain to find headers appropriately. (This is only slightly odd, given the gcc -S produces a file whose name ends in ".s"). I will make some remarks here about min.S.
+Let's look at min.S , and note that we have overtly made the file have a name with ".S" as the final two characters in
+the file name. This allows our gcc toolchain to find headers appropriately. (This is only slightly odd, given the gcc -S
+produces a file whose name ends in ".s"). I will make some remarks here about min.S.
 
 	.file	"min.S"     <=== actually omittable
 	.text                     <=== the program is built in 'sections'
@@ -18,22 +24,25 @@ Let's look at min.S , and note that we have overtly made the file have a name wi
                                        <== by the linker
 min:  <===== a 'label' -- left justified identifier, followed by a colon
 	cmp	r14, r15   <== cmp is a 'synthetic' instruction provided
-	                           <== for your convenince .. actuall sub 
-	jl	.Lreturn   <== 'jump less' . The < relation in concert with 
-	                           <== the above cmp should be thought of as 
-	                           <== "Is r14 < r15" ? . The habit should be 
-	                           <== cmp op1, op2 followed by j ? where 
+	                           <== for your convenince .. actuall sub
+	jl	.Lreturn   <== 'jump less' . The < relation in concert with
+	                           <== the above cmp should be thought of as
+	                           <== "Is r14 < r15" ? . The habit should be
+	                           <== cmp op1, op2 followed by j ? where
 	                           <== >, < , >= , <= etc are thought of in terms
-                                       <== of op1 ? op2 
-	mov	r14, r15   <== put value in r15 
+                                       <== of op1 ? op2
+	mov	r14, r15   <== put value in r15
 .Lreturn:                          <== and go away. Note that 'label'
 		               <== is simply name for place in code
 		               <== and might have nothing on its source
-		                <== code line. 
-	ret                      <== go back to them that called us 
+		                <== code line.
+	ret                      <== go back to them that called us
 
-You are to write and push a Single File whose name is MyMult.S which can be called from a C main. Be sure to test with your own main, but DO NOT send me a) your tester.c b) your .elf or other debris from your program development. 
+You are to write and push a Single File whose name is MyMult.S which can be called from a C main. Be sure to test
+with your own main, but DO NOT send me a) your tester.c b) your .elf or other debris from your program development.
 
-This should be straightforward since the overall scheme is mimicked here, but do recall that gdb is your friend if / when there are bugs. Keep in mind that in a most literal way you are 'assembling' a program, instruction by instruction. As usual, please provide appropriate comments in your source code. 
+This should be straightforward since the overall scheme is mimicked here, but do recall that gdb is your friend if /
+when there are bugs. Keep in mind that in a most literal way you are 'assembling' a program, instruction by instruction. 
+As usual, please provide appropriate comments in your source code.
 
 rgt

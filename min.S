@@ -1,10 +1,8 @@
-	.file	"min.S"
+	.file	"MyMult.S"
 	.text
-.global	min
-min:
-	cmp	r14, r15
-	jl	.Lreturn
-	mov	r14, r15
-.Lreturn:
-	ret
-
+.global	MyMult
+MyMult:
+ret:
+	add.w	r14, r15
+	dec.w r14
+	jnz .ret

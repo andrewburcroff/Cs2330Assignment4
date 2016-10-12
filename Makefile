@@ -1,6 +1,6 @@
 # Project name
 SOURCE          = main.c
-ADDITIONAL      = min.S
+ADDITIONAL      = MyMult.S
 # Get base name so we can create .elf file
 NAME            = $(basename $(SOURCE))
 # MSP430 MCU to compile for
